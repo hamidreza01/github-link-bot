@@ -28,11 +28,10 @@ func main() {
 func messageHandler(bot *telegram.BotAPI, update telegram.Update) {
 	if len(update.Message.Text) < 60 {
 		u, err := url.ParseRequestURI(update.Message.Text)
-		u.Host = strings.ToLower(u.Host)
 		delete := false
 		if err != nil {
 			delete = true
-		} else if u.Host != "github.com" && u.Host != "www.github.com" {
+		} else if u.Host = strings.ToLower(u.Host); u.Host != "github.com" && u.Host != "www.github.com" {
 			delete = true
 		}
 		if delete {
