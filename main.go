@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"os"
+	"strings"
 
 	telegram "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
@@ -16,7 +17,7 @@ func main() {
 	updates := bot.GetUpdatesChan(u)
 	for update := range updates {
 		if update.Message != nil {
-			if update.Message.Chat.ID != 1765800269 {
+			if update.Message.Chat.ID != -1001765800269 {
 				continue
 			}
 			go messageHandler(bot, update)
@@ -27,6 +28,7 @@ func main() {
 func messageHandler(bot *telegram.BotAPI, update telegram.Update) {
 	if len(update.Message.Text) < 60 {
 		u, err := url.ParseRequestURI(update.Message.Text)
+		u.Host = strings.ToLower(u.Host)
 		delete := false
 		if err != nil {
 			delete = true
